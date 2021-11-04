@@ -1,0 +1,10 @@
+body{
+    background-color: aquamarine;
+}
+table{
+    align-items: center;
+}
+tr{
+    display: flex;
+    align-items: center;
+}
