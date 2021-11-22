@@ -54,16 +54,70 @@ submitRegForm = () => {
 const medsBtn = document.querySelectorAll("input[name='medications']");
 medsBtn.forEach(btn => {
     btn.addEventListener("change", () => {
-        console.log(btn.value);
-        if(btn.value==="yes"){
-            document.querySelector("#medsText").disabled = false;
-            document.querySelector("#medsText").required = true;
-        }
-        else{
-            document.querySelector("#medsText").value = "";
-            document.querySelector("#medsText").disabled = true;
-            document.querySelector("#medsText").required = false;
-        }
+        // console.log(btn.value);
+        // if(btn.value==="yes"){
+        //     document.querySelector("#medsText").disabled = false;
+        //     document.querySelector("#medsText").required = true;
+        // }
+        // else{
+        //     // document.querySelector("#medsText").value = "";
+        //     document.querySelector("#medsText").disabled = true;
+        //     document.querySelector("#medsText").required = false;
+        // }
     }
     )
 });
+// local storage , or json
+let patients = [];
+        addPatient = (e) => {
+            e.preventDefault(); //To prevent form resubmitting
+
+            let patient = {
+                id: Date.now(),
+                firstName: document.getElementById("firstName").value,
+                middleName: document.getElementById("middleName").value,
+                lastName: document.getElementById("lastName").value,
+                year: document.getElementById("bDate").value,
+                address: document.getElementById("address").value,
+            };
+
+            patients.push(patient);  
+            console.table(patients);
+
+            document.querySelector("#display pre").innerHTML = "\n" + JSON.stringify(patients, null, 2);
+
+            /**
+             * * Saving to local storage
+             * **/
+            localStorage.setItem("patient", JSON.stringify(patients));
+
+            document.regForm.reset();          
+        }
+
+
+        document.getElementById("submitBtn").addEventListener("click", addPatient);
+
+
+        listPatient = (e) =>{
+            e.preventDefault();
+
+            let newArray = [];
+            newArray = JSON.parse(localStorage.getItem("patient"));
+
+            console.table(newArray);
+
+            let listPatientTable = document.getElementById("listPatientTable");
+            // let register = document.getElementById("register").value;
+            newArray.forEach((register,i) => { 
+                let listRows = listPatientTable.insertRow(i+1);
+                let j = 0;
+                for(let property in register){
+                    let listCols = listRows.insertCell(j);
+                    listCols.innerHTML = register[property];
+                    j++;
+                    } 
+                }
+            );  
+        }
+
+        document.getElementById("listBtn").addEventListener("click", listPatient);

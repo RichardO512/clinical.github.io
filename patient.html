@@ -17,6 +17,9 @@
         #regForm{
             text-align: center;
         }
+        div > label span{
+            color: red;
+        }
     </style>
 </head>
 
@@ -46,7 +49,7 @@
                 <div>
                     <label for="lastName" class="form-label text-primary">Last Name <span
                             >*</span></label><br>
-                    <input type="text" name="firstName" id="firstName" required>
+                    <input type="text" name="firstName" id="lastName" required>
                 </div>
             </div>
             <div>
@@ -74,7 +77,8 @@
                     <input type="radio" name="gender" id="femaleGender">
                     <label for="femaleGender">Female</label>&ensp;
                 </div>
-            </div><hr>
+            </div>
+            <hr style="background-color:aqua;height: 5px;">
             <div>
                 <label for="cbox">Medical History:</label><br><br>
             </div>
@@ -124,12 +128,32 @@
                 </div>
             </div>
             <div>
-                <button type="submit">Submit</button>
-                <button type="reset">Reset</button>
+                <button type="submit" id="submitBtn">Submit</button>
+                <button type="reset">Reset</button><br>
+                <button id="listBtn">List of patients</button>
+                <!-- <button type="submit" id="submitBtn">Save</button> -->
             </div>
+            
+            <!-- <textarea name="register" id="register" cols="30" rows="10"></textarea> -->
         </fieldset>
         </form>
     </main>
+    <div>
+        <table id="listPatientTable" border="1" align="center">
+            <tr style="text-align: center;">
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Year</th>
+                <th>Address</th>
+            </tr>
+        </table>
+        <div id="display">
+            <pre></pre>
+        </div>
+  
+    </div>
     <footer>
         Copyright &copy;
     </footer>
